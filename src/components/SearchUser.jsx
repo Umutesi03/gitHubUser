@@ -11,7 +11,7 @@ import {
   Search
 } from "lucide-react";
 
-const LOCAL_STORAGE_KEY = "lastSearchedUser";
+const LOCAL_STORAGE_KEY = "Last searched user";
 
 const SearchUser = () => {
   const [username, setUsername] = useState("");
@@ -26,7 +26,7 @@ const SearchUser = () => {
   };
 
   useEffect(() => {
-    const storedUser = localStorage.getItem(LOCAL_STORAGE_KEY) || "octocat";
+    const storedUser = localStorage.getItem(LOCAL_STORAGE_KEY) || "Umutesi03";
     setUsername("");
     fetchGitHubUser(storedUser);
   }, [fetchGitHubUser]);
@@ -36,17 +36,15 @@ const SearchUser = () => {
       setFormError("Please enter a username");
       return;
     }
-  
-    setFormError(""); 
+
+    setFormError("");
     fetchGitHubUser(username);
     localStorage.setItem(LOCAL_STORAGE_KEY, username);
-    setUsername(""); 
+    setUsername("");
   };
-  
 
   return (
     <div className="max-w-xl mx-auto mt-10 px-4 text-sm">
-      {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">devfinder</h1>
         <button
@@ -63,11 +61,8 @@ const SearchUser = () => {
             </>
           )}
         </button>
-
-        
       </div>
 
-     
       <div className="flex items-center bg-white dark:bg-slate-800 shadow-md rounded-xl p-3">
         <Search className="text-gray-400 mr-2" />
         <input
@@ -83,15 +78,11 @@ const SearchUser = () => {
         >
           Search
         </button>
-        
       </div>
       {formError && <p className="text-red-500 mt-2">{formError}</p>}
-
-
       {error && <p className="mt-4 text-red-500">{error}</p>}
       {loading && <p className="mt-4 text-blue-500">Loading...</p>}
 
-     
       {userData && (
         <div className="mt-6 p-6 bg-white dark:bg-slate-800 rounded-xl shadow-md">
           <div className="flex gap-4 items-center">
@@ -125,7 +116,6 @@ const SearchUser = () => {
             </div>
           </div>
 
-       
           <div className="bg-gray-100 dark:bg-slate-700 p-4 rounded-lg my-4 flex justify-around text-center w-3/4 m-auto">
             <div>
               <p className="text-xs">Repos</p>
@@ -141,13 +131,20 @@ const SearchUser = () => {
             </div>
           </div>
 
-        
           <div className="text-sm space-y-2 flex flex-row gap-20 p-4 m-auto w-3/4">
             <div>
-              <p className="flex items-center gap-2">
+              <p
+                className={`flex items-center gap-2 ${
+                  !userData.location ? "opacity-50" : ""
+                }`}
+              >
                 <MapPin size={16} /> {userData.location || "Not Available"}
               </p>
-              <p className="flex items-center gap-2">
+              <p
+                className={`flex items-center gap-2 ${
+                  !userData.blog ? "opacity-50" : ""
+                }`}
+              >
                 <LinkIcon size={16} />
                 {userData.blog ? (
                   <a
@@ -168,11 +165,19 @@ const SearchUser = () => {
               </p>
             </div>
             <div>
-              <p className="flex items-center gap-2">
+              <p
+                className={`flex items-center gap-2 ${
+                  !userData.twitter_username ? "opacity-50" : ""
+                }`}
+              >
                 <Twitter size={16} />{" "}
                 {userData.twitter_username || "Not Available"}
               </p>
-              <p className="flex items-center gap-2">
+              <p
+                className={`flex items-center gap-2 ${
+                  !userData.company ? "opacity-50" : ""
+                }`}
+              >
                 <Building2 size={16} /> {userData.company || "Not Available"}
               </p>
             </div>
