@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { useGitHubUser } from "../hooks/useGitHubUser";
 import ThemeContext from "../context/ThemeContext";
-import {
-  Sun,
-  Moon,
-  MapPin,
-  Link as LinkIcon,
-  Twitter,
-  Building2,
-  Search
+import { 
+  Sun, 
+  Moon, 
+  MapPin, 
+  Link as LinkIcon, 
+  Twitter, 
+  Building2, 
+  Search 
 } from "lucide-react";
 
 const LOCAL_STORAGE_KEY = "Last searched user";
@@ -36,7 +36,6 @@ const SearchUser = () => {
       setFormError("Please enter a username");
       return;
     }
-
     setFormError("");
     fetchGitHubUser(username);
     localStorage.setItem(LOCAL_STORAGE_KEY, username);
@@ -79,6 +78,7 @@ const SearchUser = () => {
           Search
         </button>
       </div>
+
       {formError && <p className="text-red-500 mt-2">{formError}</p>}
       {error && <p className="mt-4 text-red-500">{error}</p>}
       {loading && <p className="mt-4 text-blue-500">Loading...</p>}
@@ -94,9 +94,7 @@ const SearchUser = () => {
             <div className="flex-1">
               <div className="flex justify-between flex-wrap items-start">
                 <div>
-                  <h2 className="text-xl font-bold">
-                    {userData.name || userData.login}
-                  </h2>
+                  <h2 className="text-xl font-bold">{userData.name || userData.login}</h2>
                   <a
                     href={userData.html_url}
                     target="_blank"
@@ -133,26 +131,14 @@ const SearchUser = () => {
 
           <div className="text-sm space-y-2 flex flex-row gap-20 p-4 m-auto w-3/4">
             <div>
-              <p
-                className={`flex items-center gap-2 ${
-                  !userData.location ? "opacity-50" : ""
-                }`}
-              >
+              <p className={`flex items-center gap-2 ${!userData.location ? "opacity-50" : ""}`}>
                 <MapPin size={16} /> {userData.location || "Not Available"}
               </p>
-              <p
-                className={`flex items-center gap-2 ${
-                  !userData.blog ? "opacity-50" : ""
-                }`}
-              >
+              <p className={`flex items-center gap-2 ${!userData.blog ? "opacity-50" : ""}`}>
                 <LinkIcon size={16} />
                 {userData.blog ? (
                   <a
-                    href={
-                      userData.blog.startsWith("http")
-                        ? userData.blog
-                        : `https://${userData.blog}`
-                    }
+                    href={userData.blog.startsWith("http") ? userData.blog : `https://${userData.blog}`}
                     className="text-blue-400"
                     target="_blank"
                     rel="noreferrer"
@@ -165,19 +151,10 @@ const SearchUser = () => {
               </p>
             </div>
             <div>
-              <p
-                className={`flex items-center gap-2 ${
-                  !userData.twitter_username ? "opacity-50" : ""
-                }`}
-              >
-                <Twitter size={16} />{" "}
-                {userData.twitter_username || "Not Available"}
+              <p className={`flex items-center gap-2 ${!userData.twitter_username ? "opacity-50" : ""}`}>
+                <Twitter size={16} /> {userData.twitter_username || "Not Available"}
               </p>
-              <p
-                className={`flex items-center gap-2 ${
-                  !userData.company ? "opacity-50" : ""
-                }`}
-              >
+              <p className={`flex items-center gap-2 ${!userData.company ? "opacity-50" : ""}`}>
                 <Building2 size={16} /> {userData.company || "Not Available"}
               </p>
             </div>
